@@ -24,6 +24,8 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.tags = { "./.tags;" }
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 ------------------ Options ------------------
 
 ------------------ Keymaps ------------------
@@ -113,17 +115,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local function smart_definition(cmd)
             vim.lsp.buf.definition({
                 on_list = function(options)
-                    if #options.items == 0 then
+                    local items = options.items or {}
+                    if #items == 0 then
                         vim.notify("No definition found", vim.log.levels.WARN)
                         return
                     end
-                    if #options.items > 1 then
+                    if #items > 1 then
                         Snacks.picker.lsp_definitions()
                         return
                     end
 
-                    local item = options.items[1]
-                    if cmd then vim.cmd(cmd .. " " .. item.filename) end
+                    local item = items[1]
+                    if cmd then
+                        vim.cmd(cmd .. " " .. vim.fn.fnameescape(item.filename))
+                    else
+                        vim.cmd.edit(vim.fn.fnameescape(item.filename))
+                    end
 
                     vim.api.nvim_win_cursor(0, { item.lnum, item.col - 1 })
                     vim.cmd("normal! zz")
