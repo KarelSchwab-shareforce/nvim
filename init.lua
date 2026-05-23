@@ -63,19 +63,24 @@ vim.keymap.set("n", "<C-A-l>", "<cmd>tabmove +<CR>", opts)
 vim.pack.add({ "https://github.com/navarasu/onedark.nvim" })
 vim.pack.add({
     'https://github.com/rafamadriz/friendly-snippets',
+    'https://github.com/saghen/blink.lib',
     'https://github.com/saghen/blink.cmp'
 })
 vim.pack.add({ 'https://github.com/stevearc/conform.nvim' })
 vim.pack.add({ 'https://github.com/folke/snacks.nvim' })
 
 vim.pack.add({
-    'https://github.com/saghen/blink.cmp',
     'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/williamboman/mason.nvim',
     'https://github.com/williamboman/mason-lspconfig.nvim'
 })
 vim.pack.add({ 'https://github.com/tpope/vim-fugitive' })
 vim.pack.add({ 'https://github.com/lewis6991/gitsigns.nvim' })
+
+vim.pack.add({
+    'https://github.com/neovim-treesitter/treesitter-parser-registry',
+    'https://github.com/neovim-treesitter/nvim-treesitter'
+})
 
 require("plugins.onedark")
 require("plugins.blink")
@@ -132,7 +137,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
                         vim.cmd.edit(vim.fn.fnameescape(item.filename))
                     end
 
-                    vim.api.nvim_win_cursor(0, { item.lnum, item.col - 1 })
+                    vim.api.nvim_win_set_cursor(0, { item.lnum, item.col - 1 })
                     vim.cmd("normal! zz")
                 end,
             })
