@@ -87,6 +87,7 @@ require("plugins.blink")
 require("plugins.conform")
 require("plugins.snacks")
 require("plugins.lsp")
+require("plugins.xonsh")
 ------------------ Plugins ------------------
 
 ------------------ Auto Commands ------------------
