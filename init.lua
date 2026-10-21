@@ -77,10 +77,7 @@ vim.pack.add({
 vim.pack.add({ 'https://github.com/tpope/vim-fugitive' })
 vim.pack.add({ 'https://github.com/lewis6991/gitsigns.nvim' })
 
-vim.pack.add({
-    'https://github.com/neovim-treesitter/treesitter-parser-registry',
-    'https://github.com/neovim-treesitter/nvim-treesitter'
-})
+vim.pack.add({ { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' } })
 
 require("plugins.onedark")
 require("plugins.blink")
